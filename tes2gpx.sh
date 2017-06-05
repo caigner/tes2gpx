@@ -22,8 +22,8 @@ DELETE_TES="$1"
 GPSBABEL=/usr/bin/gpsbabel
 
 for INFILE in `find . -type f -iname "*.TES"`; do
-	OUTFILE=${INFILE%.*}.gpx
-	if [[ ! -f $OUTFILE ]]; then
+   OUTFILE=${INFILE%.*}.gpx
+   if [[ ! -f $OUTFILE ]]; then
         echo "Converting $INFILE to $OUTFILE ..."
         $GPSBABEL -i wintec_tes -o gpx "$INFILE" "$OUTFILE"
         if [[ "$DELETE_TES" == "-d"  ]]; then       
@@ -31,6 +31,6 @@ for INFILE in `find . -type f -iname "*.TES"`; do
                 rm "$INFILE"
             fi
         fi
-	fi
+    fi
 done
 
