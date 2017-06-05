@@ -12,9 +12,10 @@
 # ------------------------------------------------------------------------------------------------
 
 if [[ ("$1" == "-h") || ("$1" == "--help") ]]; then
-    echo "Convert TES-files to gpx-files"
-    echo "no Paraneter = search for TES files and convert them all"
-    echo "-d = delete TES file after conversion "
+   echo "Convert TES-files to gpx-files"
+   echo "no Paraneter = search for TES files and convert them all"
+   echo "-d = delete TES file after conversion "
+   exit
 fi
 
 DELETE_TES="$1"
@@ -24,12 +25,13 @@ GPSBABEL=/usr/bin/gpsbabel
 for INFILE in `find . -type f -iname "*.TES"`; do
    OUTFILE=${INFILE%.*}.gpx
    if [[ ! -f $OUTFILE ]]; then
-        echo "Converting $INFILE to $OUTFILE ..."
-        $GPSBABEL -i wintec_tes -o gpx "$INFILE" "$OUTFILE"
-        if [[ "$DELETE_TES" == "-d"  ]]; then
-            if [[ ($? -eq 0) && (-f "$OUTFILE") ]]; then
-                rm "$INFILE"
-            fi
-        fi
-    fi
+      echo "Converting $INFILE to $OUTFILE ..."
+      $GPSBABEL -i wintec_tes -o gpx "$INFILE" "$OUTFILE"
+      if [[ "$DELETE_TES" == "-d"  ]]; then
+         if [[ ($? -eq 0) && (-f "$OUTFILE") ]]; then
+            rm "$INFILE"
+         fi
+      fi
+   fi
 done
+
