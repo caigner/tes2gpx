@@ -26,11 +26,10 @@ for INFILE in `find . -type f -iname "*.TES"`; do
    if [[ ! -f $OUTFILE ]]; then
         echo "Converting $INFILE to $OUTFILE ..."
         $GPSBABEL -i wintec_tes -o gpx "$INFILE" "$OUTFILE"
-        if [[ "$DELETE_TES" == "-d"  ]]; then       
+        if [[ "$DELETE_TES" == "-d"  ]]; then
             if [[ ($? -eq 0) && (-f "$OUTFILE") ]]; then
                 rm "$INFILE"
             fi
         fi
     fi
 done
-
